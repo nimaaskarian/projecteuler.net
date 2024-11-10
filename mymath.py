@@ -41,9 +41,20 @@ def nth_prime(n):
         bound = 12
     else:
         bound = math.ceil(n*math.log(n*math.log(n)))
-    print(bound)
     table = prime_sieve(bound)
     return np.flatnonzero(table)[n-1]
+
+def tenpow(n):
+    return 10**n
+
+def truncate(n, count, is_left=False):
+    if is_left:
+        return n//tenpow(digit_count(n)-count)
+
+    return n%tenpow(count);
+
+def digit_count(n):
+    return int(math.log10(n))+1
 
 def gen_fibo():
     f = 1
