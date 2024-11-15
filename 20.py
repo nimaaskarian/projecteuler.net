@@ -1,12 +1,5 @@
-def fact(n):
-    output = 1
-    for i in range(1, n+1):
-        output *= i
-    return output
+import math
 
-def gen_digit(num):
-    while num:
-        yield num%10
-        num//=10
+from mymath import digits
 
-print(sum(gen_digit(fact(100))))
+print(sum(digits(math.factorial(100))))

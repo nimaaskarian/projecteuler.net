@@ -1,6 +1,4 @@
-import math
-# this below, is a cool one
-import itertools
+import math, time, itertools
 import numpy as np
 def proper_divisors(n):
     for i in range(1, int(math.sqrt(n))+1):
@@ -27,6 +25,12 @@ def prime_sieve(max):
             for j in range(i*2, max, i):
                 table[j] = False
     return table
+
+def is_prime(n):
+    for i in range(2,math.isqrt(n)+1):
+        if n%i == 0:
+            return False
+    return True
 
 def primes(max):
     table = prime_sieve(max)
@@ -66,7 +70,35 @@ def gen_fibo():
         f2 = f1
         f1 = f
 
-def gen_digits(num):
+def digits(num):
     while num:
         yield num%10
         num//=10
+
+def nth_digit(num, n):
+    for _ in range(n-1):
+        num//=10
+    return  num%10
+
+def asqrt(n):
+    *_,last = itertools.takewhile(lambda i: i*i <= n, itertools.count(1))
+    return last
+
+def benchmark(callable,*args):
+    start = time.time()
+    try:
+        out = callable(*args)
+    except KeyboardInterrupt:
+        print("Interrupted. Exiting...")
+        exit(0)
+    end = time.time()
+    print(callable.__name__,end - start)
+    return out
+
+def pythagorean_triplets():
+    for m in itertools.count(1):
+        for n in range(m):
+            a = m**2 - n**2
+            b = 2*m*n
+            c = m**2 + n**2
+            yield a,b,c

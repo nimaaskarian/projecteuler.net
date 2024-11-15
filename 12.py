@@ -1,31 +1,20 @@
-import numpy as np
+import itertools
 import math
 
-def triangular_numbers(last):
-    last_num, last_triangular = last
-    
-    current_num = last_num+1
-    current_triangular = last_triangular+current_num
-    return current_triangular
+def triangular_numbers():
+    for n in itertools.count(1):
+        yield (n**2 + n)//2
 
-def count_divisors(num):
-    count = np.array(0)
-    for i in range(1, (int)(math.sqrt(num)) + 1) : 
-        if num%i == 0:
-            if num/i == i:
-                count+=1
-            else:
-                count+=2
-    return count
+def divisors(n):
+    yield 1
+    for i in range(2,math.isqrt(n)+1):
+        if n%i == 0:
+            yield i
+            yield n//i
+    yield n
 
-def triangular_divisor_length():
-    last=(0,0)
-    while True:
-        last = triangular_numbers(last)
-        num = last
-        yield (count_divisors(num), num)
-
-for count, num in triangular_divisor_length():
-    print(count, num)
-    if count >= 500:
+for n in triangular_numbers():
+    div_count = sum(1 for _ in divisors(n))
+    if div_count > 500:
+        print(n)
         break
