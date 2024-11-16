@@ -1,17 +1,14 @@
 import math, time, itertools
 import numpy as np
 def proper_divisors(n):
-    for i in range(1, int(math.sqrt(n))+1):
+    yield 1
+    for i in range(2,math.isqrt(n)+1):
         if n%i == 0:
-            division = n//i
-            if i == division or division == n:
-                yield i
-            else:
-                yield i
-                yield division
+            yield i
+            yield n//i
 
-def amicable_numbers(max):
-    for i in range(max):
+def amicable_numbers():
+    for i in itertools.count():
         d = sum(proper_divisors(i))
         if i != d and sum(proper_divisors(d)) == i:
             yield i
