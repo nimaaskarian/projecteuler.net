@@ -1,6 +1,7 @@
 SRC = $(filter-out math-helper.c, $(wildcard *.c))
 TARGETS := $(SRC:.c=)
 RUSTSRC := $(wildcard *.rs)
+RUSTTARGETS := $(patsubst %.rs, target/release/%, $(RUSTSRC))
 CFLAGS := -Ofast
 BIN := bin
 TARGET_PATHS := $(patsubst %, ${BIN}/%, $(TARGETS))
@@ -33,6 +34,8 @@ Cargo.toml:
 		echo >> $@; \
 	done
 	
-$(RUSTSRC): Cargo.toml
+$(RUSTTARGETS): Cargo.toml
 	@cargo build --release
+
+$(RUSTSRC): $(RUSTTARGETS)
 	@$(patsubst %.rs, ./target/release/%, $@)

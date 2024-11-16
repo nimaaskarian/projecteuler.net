@@ -62,15 +62,14 @@ def truncate(n, count, is_left=False):
 def digit_count(n):
     return int(math.log10(n))+1
 
-def gen_fibo():
-    f = 1
-    f1 = 1
+def fibos(max=None):
+    f1 = fn = 1
     f2 = 0
-    while True:
-        yield f
-        f = f1+f2
+    while max is None or fn < max:
+        yield fn
+        fn = f1 + f2
         f2 = f1
-        f1 = f
+        f1 = fn
 
 def digits(num):
     while num:
