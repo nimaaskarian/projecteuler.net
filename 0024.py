@@ -1,5 +1,5 @@
-import itertools
+from itertools import permutations
+from more_itertools import nth
 
-iterator = itertools.permutations("0123456789", 10)
-milionth_permutation = next(x for i,x in enumerate(iterator) if i==999999)
+milionth_permutation = nth(permutations("0123456789", 10), 999999)
 print("".join(milionth_permutation))
