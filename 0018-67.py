@@ -37,6 +37,5 @@ def read_tree(path: str):
 
 if __name__ == "__main__":
     tree = read_tree(sys.argv[1])
-    print_tree(tree, [1,0,0,2,3,1,1,1])
     print(max(find_max_sum_by_sum_tree(tree)[-1]))
 
