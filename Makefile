@@ -5,11 +5,12 @@ RUSTTARGETS := $(patsubst %.rs, target/release/%, $(RUSTSRC))
 CFLAGS := -Ofast
 BIN := bin
 TARGET_PATHS := $(patsubst %, ${BIN}/%, $(TARGETS))
+DEPS := math-helper.o
 
 $(TARGETS): %: ${BIN}/%
 	@exec 2>&1; ./$(BIN)/$@
 
-$(TARGET_PATHS): ${BIN}/%: %.o math-helper.o 
+$(TARGET_PATHS): ${BIN}/%: %.o ${DEPS}
 		@exec 2>&1; ${CC} ${CFLAGS} $^ -o $@ ${LDFLAGS}
 
 math-helper.o: math-helper.c math-helper.h
