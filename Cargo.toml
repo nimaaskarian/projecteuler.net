@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "01"
-path = "01.rs"
+name = "0001"
+path = "0001.rs"
 

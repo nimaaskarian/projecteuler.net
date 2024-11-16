@@ -1,4 +1,5 @@
-multiples = filter(lambda i: i%5 == 0 or i%3 == 0,range(1000))
-multiples_sum = sum(multiples)
+threes = range(3, 1000, 3)
+fives = range(5, 1000, 5)
+fifteens = range(15, 1000, 15)
 
-print(multiples_sum)
+print(sum(threes) + sum(fives) - sum(fifteens))
