@@ -36,9 +36,8 @@ def is_prime(n):
 
 def primes(max):
     table = prime_sieve(max)
-    for num, is_prime in enumerate(table):
-        if is_prime:
-            yield num
+    for num in np.flatnonzero(table):
+        yield num
 
 def nth_prime(n):
     if n <= 0:
