@@ -1,8 +1,6 @@
-from math import log10
-from mymath import fibos
+from mymath import digit_count, fibonacci
 
-
-for i,fibo in enumerate(fibos(),start=1):
-    if int(log10(fibo))+1 == 1000:
+for i,fibo in enumerate(fibonacci(),start=1):
+    if digit_count(fibo) == 1000:
         print(i)
         break

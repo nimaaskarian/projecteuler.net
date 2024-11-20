@@ -1,4 +1,4 @@
-import math, time, itertools
+import math, itertools
 import numpy as np
 def proper_divisors(n):
     yield 1
@@ -46,26 +46,20 @@ def nth_prime(n):
     table = prime_sieve(bound)
     return np.flatnonzero(table)[n-1]
 
-def tenpow(n):
-    return 10**n
-
 def truncate(n, count, is_left=False):
     if is_left:
-        return n//tenpow(digit_count(n)-count)
+        return n//10**(digit_count(n)-count)
 
-    return n%tenpow(count);
+    return n%10**count;
 
 def digit_count(n):
     return int(math.log10(n))+1
 
-def fibos(max=None):
-    f1 = fn = 1
-    f2 = 0
-    while max is None or fn < max:
-        yield fn
-        fn = f1 + f2
-        f2 = f1
-        f1 = fn
+def fibonacci():
+    a, b = 1, 1
+    while True:
+        yield a
+        a, b = b, a + b
 
 def digits(num):
     while num:
@@ -76,21 +70,6 @@ def nth_digit(num, n):
     for _ in range(n-1):
         num//=10
     return  num%10
-
-def asqrt(n):
-    *_,last = itertools.takewhile(lambda i: i*i <= n, itertools.count(1))
-    return last
-
-def benchmark(callable,*args):
-    start = time.time()
-    try:
-        out = callable(*args)
-    except KeyboardInterrupt:
-        print("Interrupted. Exiting...")
-        exit(0)
-    end = time.time()
-    print(callable.__name__,end - start)
-    return out
 
 def pythagorean_triplets():
     for m in itertools.count(1):

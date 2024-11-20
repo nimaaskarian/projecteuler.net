@@ -1,10 +1,7 @@
-def fibos(max):
-    fn = f1 = f2 = 1
-    while fn < max:
-        yield fn
-        fn = f1 + f2
-        f2 = f1
-        f1 = fn
+from itertools import filterfalse, takewhile
+from mymath import fibonacci
 
-sum = sum(filter(lambda i: i%2==0,fibos(4000000)))
+even_fibos = filterfalse(lambda x: x%2,fibonacci())
+even_fibos_below_4m = takewhile(lambda x: x < 4000000, even_fibos)
+sum = sum(even_fibos_below_4m)
 print(sum)
