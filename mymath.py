@@ -1,5 +1,15 @@
 import math, itertools
 import numpy as np
+
+def lowest_common_terms(a,b):
+    m = min(a,b)
+    while m > 1 and a > 1 and b > 1:
+        if b%m == 0 and a%m == 0:
+            b //= m
+            a //= m
+        m-=1
+    return a,b
+
 def proper_divisors(n):
     yield 1
     for i in range(2,math.isqrt(n)+1):
