@@ -20,5 +20,6 @@ def s_iter2int(iter):
     return int("".join(iter))
 
 def iter2int(iter):
-    return sum(map(lambda ix: ix[1]*10**ix[0], enumerate(reversed(iter))))
+    size = len(iter)
+    return sum(map(lambda ix: ix[1]*10**(size-ix[0]-1), enumerate(iter)))
 

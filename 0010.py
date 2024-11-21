@@ -1,3 +1,4 @@
 from mymath import primes
+import numpy as np
 
-print(sum(primes(2000000)))
+print(np.sum(primes(2000000)))

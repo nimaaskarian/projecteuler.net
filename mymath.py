@@ -41,10 +41,10 @@ def is_prime(n):
             return False
     return True
 
-def primes(max):
-    table = prime_sieve(max)
-    for num in np.flatnonzero(table):
-        yield num
+def primes(max=None, table=None):
+    if table is None:
+        table = prime_sieve(max)
+    return np.flatnonzero(table)
 
 def nth_prime(n):
     if n <= 0:
@@ -75,6 +75,11 @@ def digits(num):
     while num:
         yield num%10
         num//=10
+
+def digits_ltr(num):
+    size = digit_count(num)
+    for i in range(size, 0, -1):
+        yield (num%10**i)//10**(i-1)
 
 def nth_digit(num, n):
     for _ in range(n-1):
