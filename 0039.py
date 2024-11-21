@@ -16,4 +16,4 @@ for a in range(1, 1000):
         else:
             solutions[p] = 1
 
-print(max(solutions.items(), key=lambda kv: kv[1])[0])
+print(max(solutions, key=solutions.get))
