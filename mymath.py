@@ -64,8 +64,8 @@ def truncate(n, count, is_left=False):
 
     return n%10**count;
 
-def digit_count(n, b=10):
-    return int(math.log(n, b))+1
+def digit_count(n, log=math.log10):
+    return int(log(n))+1
 
 def fibonacci():
     a, b = 1, 1
@@ -79,17 +79,16 @@ def digits(num):
         num//=10
 
 def digits_ltr(num):
-    size = digit_count(num)
-    for i in range(size, 0, -1):
-        yield (num%10**i)//10**(i-1)
+    for ch in str(num):
+        yield int(ch)
 
 def nth_digit(num, n):
     for _ in range(n-1):
         num//=10
     return  num%10
 
-def nth_digit_left(num, n, b):
-    return (num%b**n)//b**(n-1)
+def nth_digit_left(num, n, base):
+    return (num%base**n)//base**(n-1)
 
 def pythagorean_triplets():
     for m in itertools.count(1):
@@ -99,16 +98,16 @@ def pythagorean_triplets():
             c = m**2 + n**2
             yield a,b,c
 
-def is_palindrome(n, b):
-    k = digit_count(n, b)
+def is_palindrome(n, base):
+    k = digit_count(n, lambda x: math.log(x,2))
     for i in range(k):
-        rev = nth_digit_left(n,k-i, b)
-        cur = nth_digit_left(n,i+1, b)
+        rev = nth_digit_left(n,k-i, base)
+        cur = nth_digit_left(n,i+1, base)
         if rev != cur:
             return False
     return True
 
-def palindrome_numbers(b=10):
+def palindrome_numbers(base=10):
     for n in itertools.count(1):
-        if is_palindrome(n, b):
+        if is_palindrome(n, base):
             yield n
