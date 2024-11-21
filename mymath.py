@@ -1,6 +1,8 @@
 import math, itertools
 import numpy as np
 
+from utils import iter2int
+
 def lowest_common_terms(a,b):
     m = min(a,b)
     while m > 1 and a > 1 and b > 1:
@@ -62,8 +64,8 @@ def truncate(n, count, is_left=False):
 
     return n%10**count;
 
-def digit_count(n):
-    return int(math.log10(n))+1
+def digit_count(n, b=10):
+    return int(math.log(n, b))+1
 
 def fibonacci():
     a, b = 1, 1
@@ -86,6 +88,9 @@ def nth_digit(num, n):
         num//=10
     return  num%10
 
+def nth_digit_left(num, n, b):
+    return (num%b**n)//b**(n-1)
+
 def pythagorean_triplets():
     for m in itertools.count(1):
         for n in range(m):
@@ -93,3 +98,17 @@ def pythagorean_triplets():
             b = 2*m*n
             c = m**2 + n**2
             yield a,b,c
+
+def is_palindrome(n, b):
+    k = digit_count(n, b)
+    for i in range(k):
+        rev = nth_digit_left(n,k-i, b)
+        cur = nth_digit_left(n,i+1, b)
+        if rev != cur:
+            return False
+    return True
+
+def palindrome_numbers(b=10):
+    for n in itertools.count(1):
+        if is_palindrome(n, b):
+            yield n
