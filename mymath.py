@@ -1,8 +1,6 @@
 import math, itertools
 import numpy as np
 
-from utils import iter2int
-
 def lowest_common_terms(a,b):
     m = min(a,b)
     while m > 1 and a > 1 and b > 1:
@@ -38,6 +36,7 @@ def prime_sieve(max):
 def is_prime(n):
     if n == 2: return True
     if n < 2: return False
+    if n % 2 == 0: return False
     for i in range(3,math.isqrt(n)+1, 2):
         if n%i == 0:
             return False
