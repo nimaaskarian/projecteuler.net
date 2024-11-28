@@ -1,6 +1,6 @@
-import time
-
 def benchmark(callable,*args, avg=None):
+    import time
+
     start = time.time()
     try:
         out = callable(*args)

@@ -1,6 +1,3 @@
-import math, itertools
-import numpy as np
-
 def lowest_common_terms(a,b):
     m = min(a,b)
     while m > 1 and a > 1 and b > 1:
@@ -11,6 +8,7 @@ def lowest_common_terms(a,b):
     return a,b
 
 def proper_divisors(n):
+    import math
     yield 1
     for i in range(2,math.isqrt(n)+1):
         if n%i == 0:
@@ -18,12 +16,14 @@ def proper_divisors(n):
             yield n//i
 
 def amicable_numbers():
+    import itertools
     for i in itertools.count():
         d = sum(proper_divisors(i))
         if i != d and sum(proper_divisors(d)) == i:
             yield i
 
 def prime_sieve(max):
+    import numpy as np
     table = np.ones(max, bool)
     table[0] = False
     table[1] = False
@@ -34,6 +34,7 @@ def prime_sieve(max):
     return table
 
 def is_prime(n):
+    import math
     if n == 2: return True
     if n < 2: return False
     if n % 2 == 0: return False
@@ -43,11 +44,14 @@ def is_prime(n):
     return True
 
 def primes(max=None, table=None):
+    import numpy as np
     if table is None:
         table = prime_sieve(max)
     return np.flatnonzero(table)
 
 def nth_prime(n):
+    import math
+    import numpy as np
     if n <= 0:
         raise ValueError("Argument \"n\" should be a natural (n > 0) number.")
     if n < 6:
@@ -63,7 +67,10 @@ def truncate(n, count, is_left=False):
 
     return n%10**count;
 
-def digit_count(n, log=math.log10):
+def digit_count(n, log=None):
+    import math
+    if log is None:
+        log = math.log10
     return int(log(n))+1
 
 def fibonacci():
@@ -90,6 +97,7 @@ def nth_digit_left(num, n, base):
     return (num%base**n)//base**(n-1)
 
 def pythagorean_triplets():
+    import itertools
     for m in itertools.count(1):
         for n in range(m):
             a = m**2 - n**2
@@ -98,6 +106,7 @@ def pythagorean_triplets():
             yield a,b,c
 
 def is_palindrome(n, base):
+    import math
     k = digit_count(n, lambda x: math.log(x,2))
     for i in range(k):
         rev = nth_digit_left(n,k-i, base)
@@ -107,6 +116,7 @@ def is_palindrome(n, base):
     return True
 
 def palindrome_numbers(base=10):
+    import itertools
     for n in itertools.count(1):
         if is_palindrome(n, base):
             yield n
