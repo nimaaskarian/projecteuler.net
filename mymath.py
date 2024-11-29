@@ -1,3 +1,26 @@
+def pentagonals(start=1):
+    import itertools
+    for n in itertools.count(start):
+        yield n*(3*n - 1)//2
+
+def hexagonals(start=1):
+    import itertools
+    for n in itertools.count(start):
+        yield 2*n**2 - n
+
+def is_solvable_to_natural(p, a, c_coefficient, b=1):
+    import math
+    if p == 0:
+        return False
+    c = -c_coefficient * p
+    delta = b*b - 4*a*c
+    if delta < 0:
+        return False
+    delta_rt = math.sqrt(delta)
+    if delta_rt % 1 != 0:
+        return False
+    return (b + delta_rt) % (2*a) == 0
+
 def lowest_common_terms(a,b):
     m = min(a,b)
     while m > 1 and a > 1 and b > 1:
