@@ -30,6 +30,25 @@ def lowest_common_terms(a,b):
         m-=1
     return a,b
 
+def prime_divisors(n):
+    from itertools import count
+    for i in count(2):
+        while n%i == 0:
+            yield i
+            n//=i
+            if i > n:
+                return
+
+def unique_prime_divisors(n):
+    from itertools import count
+    for i in count(2):
+        if n%i == 0:
+            yield i
+        while n%i == 0:
+            n//=i
+        if i > n:
+            return
+
 def proper_divisors(n):
     import math
     yield 1

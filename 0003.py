@@ -1,7 +1,7 @@
 import math
 def prime_factors(num):
     factors = []
-    for i in range(2, math.isqrt(num)):
+    for i in range(2, int(math.isqrt(num))):
         if num%i == 0:
             if not any(filter(lambda fac: i%fac==0,factors)):
                 factors.append(i)
