@@ -97,7 +97,7 @@ def digit_count(n, log=None):
     return int(log(n))+1
 
 def fibonacci():
-    a, b = 1, 1
+    a = b = 1
     while True:
         yield a
         a, b = b, a + b
