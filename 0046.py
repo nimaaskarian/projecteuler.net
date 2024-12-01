@@ -1,20 +1,18 @@
 import itertools
+from math import sqrt
 from mymath import is_prime
 
-primes = []
+primes = [2]
 def check_n_has_conjucture(n):
     for p in primes:
-        for sq in map(lambda x: x*x, itertools.count(1)):
-            if 2*sq + p == n:
-                return True
-            if 2*sq + p > n:
-                break
+        if sqrt((n - p)//2) % 1 == 0:
+            return True
     return False
 
-for n in itertools.count(2):
+for n in itertools.count(3, step=2):
     if is_prime(n):
         primes.append(n)
-    elif n % 2 == 1:
+    else:
         if not check_n_has_conjucture(n):
             print(n)
             break
