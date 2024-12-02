@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-last=$(fd -tf --max-depth 1 | grep '[0-9]' | grep -v '.txt' | tail -n 1 | sed 's/^0\+//')
+last=$(fd -tf --max-depth 1 '[0-9]+.\w+' --exclude "*.txt"  | tail -n 1 | sed 's/^0\+//')
 last=${last%.*}
 next=$((last+1))
 
@@ -25,4 +25,4 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
- [ $FORMAT ] && printf "%04d%s\n" $next "$ARGS" || echo "$next$ARGS"
+[ $FORMAT ] && printf "%04d%s\n" $next "$ARGS" || echo "$next$ARGS"
