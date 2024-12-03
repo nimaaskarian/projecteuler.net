@@ -1,3 +1,5 @@
+def is_int(f):
+    return f % 1 == 0
 def pentagonals(start=1):
     import itertools
     for n in itertools.count(start):
