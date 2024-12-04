@@ -1,3 +1,7 @@
+#ifndef uint
+#define uint unsigned int
+#endif
+
 #define DECLR_DIGIT_COUNT(TYPE) TYPE digit_count(TYPE);
 #define DIGIT_COUNT(TYPE) \
 TYPE digit_count(TYPE n) { \
@@ -19,3 +23,8 @@ TYPE tenpow(int n) \
   } \
   return out; \
 }
+
+uint nth_digit_left(uint num,uint n,uint base);
+uint intpow(uint a, uint b);
+bool is_palindrome(uint n);
+uint reverse_num(uint n);

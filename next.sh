@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-last=$(fd -tf --max-depth 1 '[0-9]+.\w+' --exclude "*.txt"  | tail -n 1 | sed 's/^0\+//')
-last=${last%.*}
-next=$((last+1))
-
 help(){
   echo "Usage: $0 -f append-strings"
 }
@@ -12,6 +8,10 @@ while [[ $# -gt 0 ]]; do
   case $1 in
     -f|--format)
       FORMAT="1"
+      shift
+      ;;
+    -l|--lang)
+      HAS_LANG="1"
       shift
       ;;
     -*|--*)
@@ -24,5 +24,14 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
+if [ "$HAS_LANG" ]; then
+  last=$(fd -tf --max-depth 1 '[0-9]+.\w+' --exclude "*.txt" | grep "$ARGS" | tail -n 1 | sed 's/^0\+//')
+  else
+  last=$(fd -tf --max-depth 1 '[0-9]+.\w+' --exclude "*.txt" | tail -n 1 | sed 's/^0\+//')
+fi
+last=${last%.*}
+next=$((last+1))
+
 
 [ $FORMAT ] && printf "%04d%s\n" $next "$ARGS" || echo "$next$ARGS"

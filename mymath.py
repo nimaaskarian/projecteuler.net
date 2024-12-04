@@ -149,9 +149,9 @@ def pythagorean_triplets():
             c = m**2 + n**2
             yield a,b,c
 
-def is_palindrome(n, base):
+def is_palindrome(n, base=10):
     import math
-    k = digit_count(n, lambda x: math.log(x,2))
+    k = digit_count(n, lambda x: math.log(x,base))
     for i in range(k):
         rev = nth_digit_left(n,k-i, base)
         cur = nth_digit_left(n,i+1, base)
