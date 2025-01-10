@@ -1,10 +1,10 @@
-def generate_coins(max, coins, sum=0):
+def generate_coins(max, coins, start=0, sum=0):
     if sum >= max:
         if sum == max:
             yield 1
     else:
-        for i, coin in enumerate(coins):
-            yield from generate_coins(max, coins[i:], sum+coin)
+        for i in range(start,len(coins)):
+            yield from generate_coins(max, coins,i, sum+coins[i])
 
             
 
